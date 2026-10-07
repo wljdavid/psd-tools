@@ -136,3 +136,7 @@ class SmartObject(object):
         return "SmartObject(%r kind=%r type=%r size=%s)" % (
             self.filename, self.kind, self.filetype, self.filesize
         )
+
+    @property
+    def config(self):
+        return self._config.data

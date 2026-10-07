@@ -34,6 +34,7 @@ class PSDImage(GroupMixin):
         for layer in psd:
             layer_image = layer.compose()
     """
+
     def __init__(self, data):
         assert isinstance(data, PSD)
         self._record = data
@@ -647,3 +648,17 @@ class PSDImage(GroupMixin):
                 current_group._layers.append(layer)
 
         self._compute_clipping_layers()
+
+    def layser(self, psd=None):
+        result = []
+        if psd == None:
+            layser = self._layers
+        else:
+            layser = psd
+
+        for item in layser:
+            if item.is_group():
+                result.extend(self.layser(item))
+            else:
+                result.append(item)
+        return result
